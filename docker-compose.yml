@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  db_postgres:
+    image: 'bitnami/postgresql:latest'
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRESQL_DATABASE: gymCheck
+      POSTGRESQL_USERNAME: docker
+      POSTGRESQL_PASSWORD: docker
+    volumes:
+      - pgdata:/bitnami/postgresql
+
+volumes:
+  pgdata:
