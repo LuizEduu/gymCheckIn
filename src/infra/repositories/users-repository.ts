@@ -1,6 +1,6 @@
 import { Prisma, User } from '@prisma/client'
 
-type findByEmailResponse = {
+export type findByEmailResponse = {
   id: string
   email: string
 }
