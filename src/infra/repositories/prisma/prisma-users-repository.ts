@@ -16,10 +16,6 @@ export class PrismaUsersRepository implements UsersRepository {
       where: {
         email,
       },
-      select: {
-        id: true,
-        email: true,
-      },
     })
   }
 }
