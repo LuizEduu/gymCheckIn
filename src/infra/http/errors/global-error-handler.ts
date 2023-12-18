@@ -1,4 +1,5 @@
 import { env } from '@/env'
+import { InvalidCredentialsError } from '@/modules/user/errors/invalid-credentials-error'
 import { UserAlreadyExistsError } from '@/modules/user/errors/user-already-exists-error'
 import { FastifyError, FastifyRequest, FastifyReply } from 'fastify'
 import { ZodError } from 'zod'
@@ -16,6 +17,10 @@ export async function globalErrorHandler(
 
   if (error instanceof UserAlreadyExistsError) {
     return reply.status(409).send({ message: error.message })
+  }
+
+  if (error instanceof InvalidCredentialsError) {
+    return reply.status(401).send({ message: error.message })
   }
 
   if (env.NODE_ENV !== 'production') {
