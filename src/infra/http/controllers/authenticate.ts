@@ -1,6 +1,5 @@
 import { z } from 'zod'
 import { FastifyRequest, FastifyReply } from 'fastify'
-import { RegisterUseCase } from '@/modules/user/use-cases/register'
 import { PrismaUsersRepository } from '@/infra/repositories/prisma/prisma-users-repository'
 import { AuthenticateUseCase } from '@/modules/user/use-cases/authenticate'
 
