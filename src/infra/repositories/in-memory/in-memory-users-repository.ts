@@ -1,11 +1,11 @@
 import { Prisma, User } from '@prisma/client'
-import { UsersRepository, findByEmailResponse } from '../users-repository'
+import { UsersRepository } from '../users-repository'
 import { randomUUID } from 'node:crypto'
 
 export class InMemoryUsersRepository implements UsersRepository {
   public readonly users: User[] = []
 
-  async create(data: Prisma.UserCreateInput): Promise<User> {
+  async create(data: Prisma.UserCreateInput) {
     const user = {
       id: randomUUID(),
       name: data.name,
@@ -19,13 +19,15 @@ export class InMemoryUsersRepository implements UsersRepository {
     return user
   }
 
-  async findByEmail(email: string): Promise<findByEmailResponse | null> {
+  async findByEmail(email: string) {
     const user = this.users.find((user) => user.email === email)
 
-    if (!user) {
-      return null
-    }
+    return user || null
+  }
 
-    return user
+  async findById(id: string) {
+    const user = this.users.find((user) => user.id === id)
+
+    return user || null
   }
 }

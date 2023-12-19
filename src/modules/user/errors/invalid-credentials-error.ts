@@ -1,5 +1,5 @@
 export class InvalidCredentialsError extends Error {
-  public readonly name
+  public readonly name: string
   constructor() {
     super('Invalid credentials')
     this.name = 'InvalidCredentialsError'
