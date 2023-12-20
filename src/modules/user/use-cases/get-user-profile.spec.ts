@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { compare, hash } from 'bcryptjs'
+import { hash } from 'bcryptjs'
 import { InMemoryUsersRepository } from '@/infra/repositories/in-memory/in-memory-users-repository'
-import { UserAlreadyExistsError } from '@/modules/user/errors/user-already-exists-error'
 import { UsersRepository } from '@/infra/repositories/users-repository'
 import { GetUserProfileUseCase } from './get-user-profile'
 import { ResourceNotFoundError } from '../errors/resource-not-found'
