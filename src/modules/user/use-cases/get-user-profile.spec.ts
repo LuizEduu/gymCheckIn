@@ -3,7 +3,7 @@ import { hash } from 'bcryptjs'
 import { InMemoryUsersRepository } from '@/infra/repositories/in-memory/in-memory-users-repository'
 import { UsersRepository } from '@/infra/repositories/users-repository'
 import { GetUserProfileUseCase } from './get-user-profile'
-import { ResourceNotFoundError } from '../errors/resource-not-found'
+import { ResourceNotFoundError } from '../../../errors/resource-not-found'
 
 let usersRepository: UsersRepository
 let sut: GetUserProfileUseCase

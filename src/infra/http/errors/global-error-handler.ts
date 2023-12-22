@@ -1,6 +1,6 @@
 import { env } from '@/env'
-import { InvalidCredentialsError } from '@/modules/user/errors/invalid-credentials-error'
-import { UserAlreadyExistsError } from '@/modules/user/errors/user-already-exists-error'
+import { InvalidCredentialsError } from '@/errors/invalid-credentials-error'
+import { UserAlreadyExistsError } from '@/errors/user-already-exists-error'
 import { FastifyError, FastifyRequest, FastifyReply } from 'fastify'
 import { ZodError } from 'zod'
 
