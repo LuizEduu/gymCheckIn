@@ -2,7 +2,7 @@ import { UsersRepository } from '@/infra/repositories/users-repository'
 import { hash } from 'bcryptjs'
 import { UserAlreadyExistsError } from '../../../errors/user-already-exists-error'
 import { User } from '@prisma/client'
-import { RegisterUseCaseRequestDTO } from '../dto/registerRequestDTO'
+import { RegisterUseCaseRequestDTO } from '../dto/register-request-DTO'
 
 interface RegisterUseCaseResponse {
   user: User

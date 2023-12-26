@@ -5,7 +5,7 @@ import { CheckIn } from '@prisma/client'
 import { getDistanceBetweenCoordinates } from '@/utils/get-distance-between-coordinates'
 import { MaxDistanceError } from '@/errors/max-distance-error'
 import { MaxNumbersOfCheckInError } from '@/errors/max-number-of-check-ins-error'
-import { CheckInRequestDTO } from '../dto/checkInRequestDTO'
+import { CheckInRequestDTO } from '../dto/check-In-request-DTO'
 
 interface CheckInUseCaseResponse {
   checkIn: CheckIn

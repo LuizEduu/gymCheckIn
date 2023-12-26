@@ -38,4 +38,8 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
 
     return checkOnSameDate
   }
+
+  async findManyByUserId(userId: string) {
+    return this.checkIns.filter((checkIn) => checkIn.user_id === userId)
+  }
 }

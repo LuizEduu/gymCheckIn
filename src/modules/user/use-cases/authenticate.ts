@@ -2,7 +2,7 @@ import { UsersRepository } from '@/infra/repositories/users-repository'
 import { InvalidCredentialsError } from '../../../errors/invalid-credentials-error'
 import { compare } from 'bcryptjs'
 import { User } from '@prisma/client'
-import { AuthenticateRequestDTO } from '../dto/authenticateRequestDTO'
+import { AuthenticateRequestDTO } from '../dto/authenticate-request-DTO'
 
 interface AuthenticateUseCaseResponse {
   user: User

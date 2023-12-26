@@ -1,7 +1,7 @@
 import { UsersRepository } from '@/infra/repositories/users-repository'
 import { User } from '@prisma/client'
 import { ResourceNotFoundError } from '../../../errors/resource-not-found'
-import { GetUserProfileRequestDTO } from '../dto/getUserProfileRequestDTO'
+import { GetUserProfileRequestDTO } from '../dto/get-user-profile-request-DTO'
 
 interface GetUserProfileUseCaseResponse {
   user: User
