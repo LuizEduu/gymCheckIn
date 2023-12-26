@@ -2,11 +2,7 @@ import { UsersRepository } from '@/infra/repositories/users-repository'
 import { InvalidCredentialsError } from '../../../errors/invalid-credentials-error'
 import { compare } from 'bcryptjs'
 import { User } from '@prisma/client'
-
-interface AuthenticateUseCaseRequest {
-  email: string
-  password: string
-}
+import { AuthenticateRequestDTO } from '../dto/authenticateRequestDTO'
 
 interface AuthenticateUseCaseResponse {
   user: User
@@ -18,7 +14,7 @@ export class AuthenticateUseCase {
   async execute({
     email,
     password,
-  }: AuthenticateUseCaseRequest): Promise<AuthenticateUseCaseResponse> {
+  }: AuthenticateRequestDTO): Promise<AuthenticateUseCaseResponse> {
     const user = await this.usersRepository.findByEmail(email)
 
     if (!user) {
