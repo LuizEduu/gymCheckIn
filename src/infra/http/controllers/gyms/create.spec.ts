@@ -23,8 +23,8 @@ describe('Create gym (e2e)', () => {
         title: 'any_title',
         description: 'any_description',
         phone: '2222222222',
-        latitude: -8.1231872,
-        longitude: -35.2780288,
+        latitude: -8.1133568,
+        longitude: -35.2878592,
       })
 
     expect(response.statusCode).toEqual(201)

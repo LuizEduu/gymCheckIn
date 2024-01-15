@@ -4,12 +4,8 @@ import { makeSearchNearbyGymsUseCase } from '@/modules/gym/use-cases/factories/m
 
 export async function nearby(request: FastifyRequest, reply: FastifyReply) {
   const searchGymsNearbyQuerySchema = z.object({
-    latitude: z.coerce.number().refine((value) => {
-      return Math.abs(value) <= 90
-    }),
-    longitude: z.coerce.number().refine((value) => {
-      return Math.abs(value) >= 180
-    }),
+    latitude: z.coerce.number(),
+    longitude: z.coerce.number(),
   })
 
   const { latitude, longitude } = searchGymsNearbyQuerySchema.parse(
@@ -23,5 +19,7 @@ export async function nearby(request: FastifyRequest, reply: FastifyReply) {
     userLongitude: longitude,
   })
 
-  return reply.status(200).send(gyms)
+  return reply.status(200).send({
+    gyms,
+  })
 }
