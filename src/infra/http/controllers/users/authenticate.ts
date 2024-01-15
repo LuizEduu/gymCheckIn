@@ -29,7 +29,25 @@ export async function authenticate(
     },
   )
 
-  return reply.status(200).send({
-    token,
-  })
+  const refreshToken = await reply.jwtSign(
+    {},
+    {
+      sign: {
+        sub: user.id,
+        expiresIn: '7d',
+      },
+    },
+  )
+
+  return reply
+    .setCookie('refreshToken', refreshToken, {
+      path: '/', // quais rotas da aplicação vão ter acesso
+      secure: true, // usando http define que o cookie vai ser encriptado
+      sameSite: true, // cookie só vai ser acessível dentro do mesmo dominio/site
+      httpOnly: true, // cookie só vai ser acessado apenas nos contextos de request e response do backend
+    })
+    .status(200)
+    .send({
+      token,
+    })
 }
