@@ -1,27 +1,13 @@
-import { z } from 'zod'
 import { FastifyRequest, FastifyReply } from 'fastify'
-import { makeAuthenticateUseCase } from '@/modules/user/use-cases/factories/make-authenticate-use-case'
 
 export async function refresh(request: FastifyRequest, reply: FastifyReply) {
-  const authenticateBodySchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(6),
-  })
-
-  const { email, password } = authenticateBodySchema.parse(request.body)
-
-  const authenticateUseCase = makeAuthenticateUseCase()
-
-  const { user } = await authenticateUseCase.execute({
-    email,
-    password,
-  })
+  await request.jwtVerify({ onlyCookie: true }) // vai ignorar a informação que tá no header/authorization, vai validar o refreshToken no cookie
 
   const token = await reply.jwtSign(
     {},
     {
       sign: {
-        sub: user.id,
+        sub: request.user.sub,
       },
     },
   )
@@ -30,7 +16,7 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
     {},
     {
       sign: {
-        sub: user.id,
+        sub: request.user.sub,
         expiresIn: '7d',
       },
     },
@@ -38,10 +24,10 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
 
   return reply
     .setCookie('refreshToken', refreshToken, {
-      path: '/', // quais rotas da aplicação vão ter acesso
-      secure: true, // usando http define que o cookie vai ser encriptado
-      sameSite: true, // cookie só vai ser acessível dentro do mesmo dominio/site
-      httpOnly: true, // cookie só vai ser acessado apenas nos contextos de request e response do backend
+      path: '/',
+      secure: true,
+      sameSite: true,
+      httpOnly: true,
     })
     .status(200)
     .send({
