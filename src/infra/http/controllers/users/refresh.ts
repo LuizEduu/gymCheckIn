@@ -4,7 +4,9 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
   await request.jwtVerify({ onlyCookie: true }) // vai ignorar a informação que tá no header/authorization, vai validar o refreshToken no cookie
 
   const token = await reply.jwtSign(
-    {},
+    {
+      role: request.user.role,
+    },
     {
       sign: {
         sub: request.user.sub,
@@ -13,7 +15,9 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
   )
 
   const refreshToken = await reply.jwtSign(
-    {},
+    {
+      role: request.user.role,
+    },
     {
       sign: {
         sub: request.user.sub,
